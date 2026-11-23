@@ -47,8 +47,9 @@ public class WebhookController {
             return p;
         });
 
-        // si ya esta en un estado final no lo toco
-        if (pago.estado == null || !FINALES.contains(pago.estado)) {
+        // si ya esta en un estado final no lo toco, salvo CAPTURED -> REFUNDED (me lo aclaro el PO)
+        boolean reembolso = "CAPTURED".equals(pago.estado) && "REFUNDED".equals(body.status());
+        if (pago.estado == null || !FINALES.contains(pago.estado) || reembolso) {
             pago.estado = body.status();
             pago.monto = body.amount();
             pago.moneda = body.currency();

@@ -11,7 +11,7 @@ servicio para recibir los webhooks de paygate y guardar el estado de los pagos
 ## como funciona
 
 - si el `event_id` ya existe devuelve 200 y no hace nada (paygate reintenta hasta 5 veces con el mismo id)
-- si el pago ya esta en un estado final (CAPTURED, FAILED, REFUNDED) no se cambia mas
+- si el pago ya esta en un estado final (CAPTURED, FAILED, REFUNDED) no se cambia mas, salvo de CAPTURED a REFUNDED
 
 ## correrlo
 
